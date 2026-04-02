@@ -1,0 +1,136 @@
+---
+const products = [
+  {
+    name: "雲端管理平台",
+    description: "全方位雲端基礎設施管理，支援多雲環境整合與自動化部署。",
+    icon: "☁️",
+    price: "NT$ 2,400 / 月",
+  },
+  {
+    name: "數據分析引擎",
+    description: "即時數據分析與視覺化儀表板，助您快速做出數據驅動決策。",
+    icon: "📊",
+    price: "NT$ 3,600 / 月",
+  },
+  {
+    name: "智慧客服系統",
+    description: "AI 驅動的客服解決方案，24/7 自動回覆並提升客戶滿意度。",
+    icon: "🤖",
+    price: "NT$ 1,800 / 月",
+  },
+  {
+    name: "資安防護套件",
+    description: "企業級資訊安全防護，涵蓋端點偵測、威脅分析與合規管理。",
+    icon: "🔒",
+    price: "NT$ 4,200 / 月",
+  },
+  {
+    name: "協作辦公工具",
+    description: "團隊即時通訊、專案管理與文件協作，打造高效工作流程。",
+    icon: "💼",
+    price: "NT$ 900 / 月",
+  },
+  {
+    name: "API 整合平台",
+    description: "低程式碼 API 串接平台，快速整合第三方服務與內部系統。",
+    icon: "🔗",
+    price: "NT$ 2,100 / 月",
+  },
+];
+---
+
+<section id="products" class="products">
+  <div class="container">
+    <h2>產品目錄</h2>
+    <p class="subtitle">為您的企業量身打造的解決方案</p>
+    <div class="product-grid">
+      {products.map((product) => (
+        <div class="product-card">
+          <span class="product-icon">{product.icon}</span>
+          <h3>{product.name}</h3>
+          <p>{product.description}</p>
+          <span class="price">{product.price}</span>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .products {
+    padding: 6rem 2rem;
+    background: #f0f2f5;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  h2 {
+    text-align: center;
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+
+  .subtitle {
+    text-align: center;
+    color: #666;
+    font-size: 1.1rem;
+    margin-bottom: 3rem;
+  }
+
+  .product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .product-card {
+    background: white;
+    border-radius: 16px;
+    padding: 2rem;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  }
+
+  .product-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+  }
+
+  .product-icon {
+    font-size: 2.5rem;
+    display: block;
+    margin-bottom: 1rem;
+  }
+
+  h3 {
+    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
+    color: #1a1a2e;
+  }
+
+  .product-card p {
+    color: #555;
+    font-size: 0.95rem;
+    margin-bottom: 1rem;
+  }
+
+  .price {
+    display: inline-block;
+    background: #eef1ff;
+    color: #4361ee;
+    padding: 0.4rem 1rem;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 0.9rem;
+  }
+
+  @media (max-width: 640px) {
+    .product-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
