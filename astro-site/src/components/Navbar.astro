@@ -3,12 +3,13 @@ const links = [
   { href: "#hero", label: "首頁" },
   { href: "#products", label: "產品目錄" },
   { href: "#about", label: "公司介紹" },
+  { href: "/services/medical-ai-academy", label: "白袍 AI 學院" },
 ];
 ---
 
 <nav class="navbar">
   <div class="nav-container">
-    <a href="#hero" class="logo">子彥好棒棒有限公司</a>
+    <a href="/" class="logo">子彥好棒棒有限公司</a>
     <ul class="nav-links">
       {links.map((link) => (
         <li><a href={link.href}>{link.label}</a></li>

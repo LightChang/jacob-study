@@ -1,0 +1,366 @@
+---
+import Layout from "../../layouts/Layout.astro";
+---
+
+<Layout title="白袍AI學院｜AI與醫療的協同工作">
+  <main class="academy-page">
+    <a href="/" class="back-link">← 返回首頁</a>
+
+    <section class="hero" id="academy-hero">
+      <div class="aurora"></div>
+      <div class="grid-overlay"></div>
+      <div class="hero-inner" data-tilt-card>
+        <span class="badge">全新服務項目</span>
+        <h1>白袍 AI 學院</h1>
+        <p class="tagline">AI 與醫療協同工作，<br />以科技守護生命。</p>
+        <p class="summary">
+          透過臨床情境模擬、AI 工作流程導入與醫療倫理實作，協助醫療團隊快速建立
+          「可落地、可衡量、可持續」的智慧醫療能力。
+        </p>
+        <div class="hero-actions">
+          <a href="#modules" class="btn btn-primary">探索課程模組</a>
+          <a href="#contact" class="btn btn-secondary">預約顧問諮詢</a>
+        </div>
+      </div>
+      <div class="pulse pulse-1"></div>
+      <div class="pulse pulse-2"></div>
+    </section>
+
+    <section id="modules" class="modules">
+      <h2>三階段導入藍圖</h2>
+      <div class="module-grid">
+        <article class="module-card" data-reveal>
+          <h3>01｜AI 醫療素養啟動</h3>
+          <p>建立 AI 基礎概念、模型限制與臨床場景辨識能力，避免盲目導入。</p>
+          <ul>
+            <li>醫療 AI 應用地圖</li>
+            <li>提示工程與臨床問答</li>
+            <li>風險辨識工作坊</li>
+          </ul>
+        </article>
+        <article class="module-card" data-reveal>
+          <h3>02｜跨科別協作實戰</h3>
+          <p>以真實流程打造「醫師 × 護理 × 資訊」共作機制，縮短導入落差。</p>
+          <ul>
+            <li>病歷摘要與判讀助手</li>
+            <li>病患溝通內容優化</li>
+            <li>流程節點自動化演練</li>
+          </ul>
+        </article>
+        <article class="module-card" data-reveal>
+          <h3>03｜院內治理與擴散</h3>
+          <p>落實治理規範、成效追蹤與教練制度，讓創新可持續擴大。</p>
+          <ul>
+            <li>資料治理與權限設計</li>
+            <li>成效 KPI 與儀表板</li>
+            <li>內部種子講師培訓</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section id="contact" class="contact">
+      <div class="contact-card" data-tilt-card>
+        <h2>讓醫療團隊無痛升級 AI 能力</h2>
+        <p>提供 2 小時體驗講座、4 週密集培訓到 12 週院內共創計畫，可依院所規模客製。</p>
+        <a class="btn btn-primary" href="mailto:academy@example.com">立即索取方案簡報</a>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const cards = document.querySelectorAll("[data-tilt-card]");
+
+    const handleMove = (event, card) => {
+      const rect = card.getBoundingClientRect();
+      const x = event.clientX - rect.left;
+      const y = event.clientY - rect.top;
+      const rotateX = ((y / rect.height) - 0.5) * -10;
+      const rotateY = ((x / rect.width) - 0.5) * 10;
+
+      card.style.setProperty("--rx", `${rotateX.toFixed(2)}deg`);
+      card.style.setProperty("--ry", `${rotateY.toFixed(2)}deg`);
+      card.style.setProperty("--mx", `${(x / rect.width) * 100}%`);
+      card.style.setProperty("--my", `${(y / rect.height) * 100}%`);
+    };
+
+    cards.forEach((card) => {
+      card.addEventListener("mousemove", (event) => handleMove(event, card));
+      card.addEventListener("mouseleave", () => {
+        card.style.setProperty("--rx", "0deg");
+        card.style.setProperty("--ry", "0deg");
+        card.style.setProperty("--mx", "50%");
+        card.style.setProperty("--my", "50%");
+      });
+    });
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) entry.target.classList.add("is-visible");
+        });
+      },
+      { threshold: 0.2 }
+    );
+
+    document.querySelectorAll("[data-reveal]").forEach((el) => observer.observe(el));
+  </script>
+</Layout>
+
+<style>
+  .academy-page {
+    min-height: 100vh;
+    color: #e8f3ff;
+    background: radial-gradient(circle at 20% 20%, #1d4ed8 0%, #030712 55%, #01040d 100%);
+    overflow-x: hidden;
+    padding: 2rem clamp(1rem, 3vw, 2rem) 4rem;
+  }
+
+  .back-link {
+    display: inline-flex;
+    margin: 1rem auto 2rem;
+    color: #9dd8ff;
+    font-weight: 600;
+  }
+
+  .hero {
+    position: relative;
+    max-width: 1200px;
+    margin: 0 auto;
+    border-radius: 28px;
+    min-height: 65vh;
+    display: grid;
+    place-items: center;
+    padding: 3rem 1.5rem;
+    isolation: isolate;
+    border: 1px solid rgba(157, 216, 255, 0.25);
+    background: rgba(4, 20, 44, 0.7);
+    box-shadow: inset 0 0 80px rgba(67, 157, 255, 0.12), 0 40px 90px rgba(1, 7, 25, 0.8);
+  }
+
+  .grid-overlay,
+  .aurora {
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+  }
+
+  .grid-overlay {
+    background-image: linear-gradient(rgba(120, 190, 255, 0.12) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(120, 190, 255, 0.12) 1px, transparent 1px);
+    background-size: 28px 28px;
+    mask-image: radial-gradient(circle at center, black 45%, transparent 90%);
+  }
+
+  .aurora {
+    background: radial-gradient(circle at 20% 20%, rgba(85, 203, 255, 0.35), transparent 40%),
+      radial-gradient(circle at 80% 10%, rgba(56, 189, 248, 0.25), transparent 38%),
+      radial-gradient(circle at 50% 100%, rgba(87, 145, 255, 0.18), transparent 60%);
+    animation: drift 8s ease-in-out infinite alternate;
+  }
+
+  .hero-inner,
+  .contact-card {
+    --rx: 0deg;
+    --ry: 0deg;
+    --mx: 50%;
+    --my: 50%;
+    position: relative;
+    transform-style: preserve-3d;
+    transform: perspective(900px) rotateX(var(--rx)) rotateY(var(--ry));
+    transition: transform 0.2s ease-out;
+    background: linear-gradient(140deg, rgba(10, 50, 105, 0.86), rgba(12, 31, 67, 0.86));
+    border: 1px solid rgba(173, 228, 255, 0.35);
+    border-radius: 24px;
+    padding: clamp(1.5rem, 3vw, 2.5rem);
+    max-width: 760px;
+    backdrop-filter: blur(8px);
+    box-shadow: 0 20px 55px rgba(3, 9, 27, 0.6);
+    overflow: hidden;
+  }
+
+  .hero-inner::after,
+  .contact-card::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at var(--mx) var(--my), rgba(173, 228, 255, 0.22), transparent 35%);
+    pointer-events: none;
+  }
+
+  .badge {
+    display: inline-block;
+    padding: 0.35rem 0.9rem;
+    border-radius: 999px;
+    font-size: 0.85rem;
+    letter-spacing: 0.08em;
+    font-weight: 700;
+    color: #082f49;
+    background: linear-gradient(120deg, #7dd3fc, #dbeafe);
+    margin-bottom: 1rem;
+  }
+
+  h1 {
+    font-size: clamp(2rem, 4vw, 3.8rem);
+    letter-spacing: 0.03em;
+    line-height: 1.1;
+    margin-bottom: 1rem;
+    text-shadow: 0 8px 30px rgba(120, 223, 255, 0.3);
+  }
+
+  .tagline {
+    font-size: clamp(1.15rem, 2.2vw, 1.8rem);
+    color: #d2ebff;
+    line-height: 1.5;
+    margin-bottom: 1rem;
+  }
+
+  .summary {
+    color: #bfdbfe;
+    margin-bottom: 1.6rem;
+  }
+
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 999px;
+    padding: 0.7rem 1.25rem;
+    font-weight: 700;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .btn:hover {
+    transform: translateY(-2px);
+  }
+
+  .btn-primary {
+    color: #082f49;
+    background: linear-gradient(110deg, #67e8f9, #c4b5fd);
+    box-shadow: 0 10px 20px rgba(85, 203, 255, 0.25);
+  }
+
+  .btn-secondary {
+    color: #e0f2fe;
+    border: 1px solid rgba(173, 228, 255, 0.5);
+    background: rgba(14, 51, 94, 0.5);
+  }
+
+  .pulse {
+    position: absolute;
+    width: 200px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    border: 1px solid rgba(125, 211, 252, 0.4);
+    animation: pulse 3.6s ease-out infinite;
+    filter: blur(0.4px);
+  }
+
+  .pulse-1 {
+    top: 10%;
+    left: 6%;
+  }
+
+  .pulse-2 {
+    bottom: 12%;
+    right: 8%;
+    animation-delay: 1.8s;
+  }
+
+  .modules,
+  .contact {
+    max-width: 1200px;
+    margin: 4.5rem auto 0;
+  }
+
+  h2 {
+    font-size: clamp(1.5rem, 2.5vw, 2.4rem);
+    margin-bottom: 1.5rem;
+  }
+
+  .module-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1rem;
+  }
+
+  .module-card {
+    border-radius: 18px;
+    border: 1px solid rgba(147, 197, 253, 0.3);
+    background: rgba(8, 25, 52, 0.75);
+    padding: 1.2rem;
+    transform: translateY(20px);
+    opacity: 0;
+    transition: opacity 0.45s ease, transform 0.45s ease;
+  }
+
+  .module-card.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .module-card h3 {
+    font-size: 1.12rem;
+    margin-bottom: 0.65rem;
+    color: #bae6fd;
+  }
+
+  .module-card p {
+    color: #dbeafe;
+    margin-bottom: 0.65rem;
+  }
+
+  .module-card ul {
+    margin-left: 1.1rem;
+    color: #bfdbfe;
+  }
+
+  .contact-card {
+    max-width: 100%;
+  }
+
+  @keyframes pulse {
+    0% {
+      transform: scale(0.2);
+      opacity: 0;
+    }
+    25% {
+      opacity: 0.8;
+    }
+    100% {
+      transform: scale(1.2);
+      opacity: 0;
+    }
+  }
+
+  @keyframes drift {
+    from {
+      transform: translate3d(0, -6px, 0) scale(1);
+    }
+    to {
+      transform: translate3d(8px, 6px, 0) scale(1.03);
+    }
+  }
+
+  @media (max-width: 700px) {
+    .hero {
+      min-height: auto;
+      padding: 1rem;
+    }
+
+    .hero-actions {
+      flex-direction: column;
+    }
+
+    .btn {
+      width: 100%;
+    }
+  }
+</style>
