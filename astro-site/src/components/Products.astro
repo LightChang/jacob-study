@@ -36,6 +36,13 @@ const products = [
     icon: "🔗",
     price: "NT$ 2,100 / 月",
   },
+  {
+    name: "白袍 AI 學院",
+    description: "結合 AI 與醫療場域的實戰培訓與導入顧問，強化院所智慧醫療能力。",
+    icon: "🩺",
+    price: "客製方案",
+    href: "/services/medical-ai-academy",
+  },
 ];
 ---
 
@@ -45,12 +52,12 @@ const products = [
     <p class="subtitle">為您的企業量身打造的解決方案</p>
     <div class="product-grid">
       {products.map((product) => (
-        <div class="product-card">
+        <a class="product-card" href={product.href ?? "#"} aria-label={`${product.name} 介紹頁面`}>
           <span class="product-icon">{product.icon}</span>
           <h3>{product.name}</h3>
           <p>{product.description}</p>
           <span class="price">{product.price}</span>
-        </div>
+        </a>
       ))}
     </div>
   </div>
@@ -88,6 +95,7 @@ const products = [
   }
 
   .product-card {
+    display: block;
     background: white;
     border-radius: 16px;
     padding: 2rem;
